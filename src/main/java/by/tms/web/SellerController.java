@@ -17,34 +17,35 @@ import javax.validation.Valid;
 @RequestMapping("/seller")
 public class SellerController {
 
-    private final CustomerService customerService;
-    private final SellerService sellerService;
+//    private final CustomerService customerService;
+//    private final SellerService sellerService;
+//
+//
+//    public SellerController(CustomerService customerService, SellerService sellerService) {
+//        this.customerService = customerService;
+//        this.sellerService = sellerService;
+//
+//    }
+//
+//    @GetMapping("/sellerRegistration")
+//    public String sellerRegistration(@ModelAttribute("newSeller") Seller seller) {
+//        return "sellerRegistration";
+//    }
+//
+//    @PostMapping("/sellerRegistration")
+//    public String sellerRegistration(@Valid @ModelAttribute("newSeller") Seller seller, BindingResult bindingResult, Model model) {
+//        if (bindingResult.hasErrors()) {
+//            return "sellerRegistration";
+//        }
+//        if (sellerService.findSellerByEmail(seller.getEmail()).isEmpty()
+//                && customerService.findCustomerByEmail(seller.getEmail()).isEmpty()) {
+//            sellerService.saveSeller(seller);
+//            return "redirect:/";
+//        } else {
+//            model.addAttribute("message", "User already exist");
+//            return "sellerRegistration";
+//        }
+//    }
 
 
-    public SellerController(CustomerService customerService, SellerService sellerService) {
-        this.customerService = customerService;
-        this.sellerService = sellerService;
-
-    }
-
-    @GetMapping("/sellerRegistration")
-    public String sellerRegistration(@ModelAttribute("newSeller") Seller seller) {
-        return "sellerRegistration";
-    }
-
-    @PostMapping("/sellerRegistration")
-    public String sellerRegistration(@Valid @ModelAttribute("newSeller") Seller seller, BindingResult bindingResult, Model model) {
-        if (bindingResult.hasErrors()) {
-            return "sellerRegistration";
-        }
-        if (sellerService.findSellerByEmail(seller.getEmail()).isEmpty()
-                && customerService.findCustomerByEmail(seller.getEmail()).isEmpty()) {
-            sellerService.saveSeller(seller);
-            return "redirect:/";
-        } else {
-            model.addAttribute("message", "User already exist");
-            return "sellerRegistration";
-        }
-
-    }
 }

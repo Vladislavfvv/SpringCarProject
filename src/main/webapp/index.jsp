@@ -53,33 +53,64 @@
                 </li>
             </ul>
             <ul class="nav">
-                <c:if test="${sessionScope.currentCustomer == null && sessionScope.currentSeller == null}">
+
+                <c:if test="${sessionScope.currentUser == null}">
                     <li class="nav-item">
                         <a href="${pageContext.request.contextPath}/user/login" methods="get"
-                           class="nav-link link-dark px-2">Login
+                           class="nav-link link-dark px-2">LogIn
                         </a>
                     </li>
                     <li class="nav-item">
                         <a href="${pageContext.request.contextPath}/user/signup" methods="get"
-                           class="nav-link link-dark px-2">Sign up
+                           class="nav-link link-dark px-2">SignUp
                         </a>
                     </li>
                 </c:if>
 
-                <c:if test="${sessionScope.currentCustomer!=null}">
+                <c:if test="${sessionScope.currentUser!=null}">
                     <li class="nav-item">
                         <h3>
-                            Hello, ${sessionScope.currentCustomer.get().nickName}
+                            Hello, ${sessionScope.currentUser.email}
                         </h3>
+                        <br>
+                        <a href="/user/logout">LogOut</a>
                     </li>
                 </c:if>
-                <c:if test="${sessionScope.currentSeller!=null}">
-                    <li class="nav-item">
-                        <h3>
-                            Hello, ${sessionScope.currentSeller.get().nickname}
-                        </h3>
-                    </li>
-                </c:if>
+
+
+
+
+
+
+
+
+<%--                <c:if test="${sessionScope.currentCustomer == null && sessionScope.currentSeller == null}">--%>
+<%--                    <li class="nav-item">--%>
+<%--                        <a href="${pageContext.request.contextPath}/user/login" methods="get"--%>
+<%--                           class="nav-link link-dark px-2">Login--%>
+<%--                        </a>--%>
+<%--                    </li>--%>
+<%--                    <li class="nav-item">--%>
+<%--                        <a href="${pageContext.request.contextPath}/user/signup" methods="get"--%>
+<%--                           class="nav-link link-dark px-2">Sign up--%>
+<%--                        </a>--%>
+<%--                    </li>--%>
+<%--                </c:if>--%>
+
+<%--                <c:if test="${sessionScope.currentCustomer!=null}">--%>
+<%--                    <li class="nav-item">--%>
+<%--                        <h3>--%>
+<%--                            Hello, ${sessionScope.currentCustomer.get().nickName}--%>
+<%--                        </h3>--%>
+<%--                    </li>--%>
+<%--                </c:if>--%>
+<%--                <c:if test="${sessionScope.currentSeller!=null}">--%>
+<%--                    <li class="nav-item">--%>
+<%--                        <h3>--%>
+<%--                            Hello, ${sessionScope.currentSeller.get().nickname}--%>
+<%--                        </h3>--%>
+<%--                    </li>--%>
+<%--                </c:if>--%>
             </ul>
         </div>
     </nav>

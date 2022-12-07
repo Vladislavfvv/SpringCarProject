@@ -3,13 +3,16 @@ package by.tms.entity;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
-
-@NoArgsConstructor
-@AllArgsConstructor
+@Entity
+//@NoArgsConstructor
+//@AllArgsConstructor
+@Table(name = "users")
 public class User extends AbstractEntity {
     @NotBlank(message = "Field must not be empty")
     @Email
@@ -19,6 +22,14 @@ public class User extends AbstractEntity {
     @Size(message = "Password length must be 5-10 characters!", min = 5, max = 10)
     @Pattern(message = "Password must consist of numbers and latin letters!", regexp = "[\\w\\d]+")
     private String password;
+
+    public User() {
+    }
+
+    public User(String email, String password) {
+        this.email = email;
+        this.password = password;
+    }
 
     public String getEmail() {
         return email;
@@ -34,5 +45,13 @@ public class User extends AbstractEntity {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                '}';
     }
 }

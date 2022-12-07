@@ -2,6 +2,7 @@ package by.tms.storage;
 
 import by.tms.entity.Offer;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -21,21 +22,30 @@ public class InMemoryOfferStorage implements Storage<Offer, Long> {
 
     @Override
     public Optional<Offer> findById(Long aLong) {
+        for (Offer offer : offerList) {
+            if (offer.getId() == aLong)
+                return Optional.of(offer);
+        }
         return Optional.empty();
     }
 
     @Override
     public Offer delete(Offer entity) {
-        return null;
+        offerList.remove(entity);
+        return entity;
     }
 
     @Override
     public List<Offer> getListOfEntity() {
-        return null;
+        return offerList;
     }
 
     @Override
-    public Optional<Offer> findEntity(String parameter) {
+    public Optional<Offer> findEntity(String price) {
+        for (Offer offer : offerList) {
+            if(offer.getPrice().equals(price))
+                return Optional.of(offer);
+        }
         return Optional.empty();
     }
 }

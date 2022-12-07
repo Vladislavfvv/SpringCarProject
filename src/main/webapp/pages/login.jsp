@@ -11,10 +11,12 @@
 <html>
 <head>
     <title>Login page</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
 </head>
 <body>
 
-<s:form action="/user/login" method="post" modelAttribute="user">
+<s:form action="/user/login" method="post" modelAttribute="loginUser">
     <s:input path="email" size="50" placeholder="Email"></s:input>
     <br>
     <s:errors path="email" cssStyle="color: red"></s:errors>
@@ -29,6 +31,8 @@
 <h1>Not registered yet?</h1>
 <a href="/seller/sellerRegistration">Register as a Seller</a>
 <a href="/customer/customerRegistration">Register as a Customer</a>
-
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
+      integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+</head>
 </body>
 </html>

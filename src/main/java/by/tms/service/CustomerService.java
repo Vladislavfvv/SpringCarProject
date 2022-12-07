@@ -12,17 +12,19 @@ import java.util.Optional;
 @Service
 public class CustomerService {
 
-    @Autowired
-    @Qualifier("inMemoryCustomerStorage")
-    private Storage<Customer, Long> customerStorage;
-
-    public Customer saveCustomer(Customer customer){
-        customerStorage.save(customer);
-        return customer;
-    }
-
-    public Optional<Customer> findCustomerByEmail(String email){
-        return customerStorage.findEntity(email);
-    }
+//    private final Storage<Customer, Long> customerStorage;
+//
+//    public CustomerService(@Qualifier("inMemoryCustomerStorage") Storage<Customer, Long> customerStorage) {
+//        this.customerStorage = customerStorage;
+//    }
+//
+//    public Customer saveCustomer(Customer customer){
+//        customerStorage.save(customer);
+//        return customer;
+//    }
+//
+//    public Optional<Customer> findCustomerByEmail(String email){
+//        return customerStorage.findEntity(email);
+//    }
 
 }

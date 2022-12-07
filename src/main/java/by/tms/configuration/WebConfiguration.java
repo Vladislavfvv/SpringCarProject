@@ -10,6 +10,7 @@ import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 import javax.sql.DataSource;
@@ -19,7 +20,7 @@ import java.util.Properties;
 @EnableWebMvc
 @ComponentScan(basePackages = "by.tms")
 @EnableTransactionManagement
-public class WebConfiguration {
+public class WebConfiguration extends WebMvcConfigurerAdapter {
 
     @Bean
     public DataSource dataSource() {
@@ -52,7 +53,7 @@ public class WebConfiguration {
         hibernateProperties.setProperty("hibernate.hbm2ddl.auto", "create-drop");
         hibernateProperties.setProperty("hibernate.dialect", "org.hibernate.dialect.PostgreSQLDialect");
         hibernateProperties.setProperty("hibernate.show_sql", "true");
-        hibernateProperties.setProperty("hibernate.enable_lazy_load_no_trans", "true");
+        //hibernateProperties.setProperty("hibernate.enable_lazy_load_no_trans", "true");
         return hibernateProperties;
     }
 

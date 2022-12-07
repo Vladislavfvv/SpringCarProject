@@ -11,16 +11,16 @@ import java.util.Optional;
 @Service
 public class SellerService {
 
-    @Autowired
-    @Qualifier("InMemorySellerStorage")
-    private Storage<Seller, Long> sellerStorage;
-
-    public Seller saveSeller(Seller seller) {
-        sellerStorage.save(seller);
-        return seller;
-    }
-
-    public Optional<Seller> findSellerByEmail(String email) {
-        return sellerStorage.findEntity(email);
-    }
+//    @Autowired
+//    @Qualifier("InMemorySellerStorage")
+//    private Storage<Seller, Long> sellerStorage;
+//
+//    public Seller saveSeller(Seller seller) {
+//        sellerStorage.save(seller);
+//        return seller;
+//    }
+//
+//    public Optional<Seller> findSellerByEmail(String email) {
+//        return sellerStorage.findEntity(email);
+//    }
 }
