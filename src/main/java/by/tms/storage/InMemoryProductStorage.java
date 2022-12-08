@@ -1,6 +1,6 @@
 package by.tms.storage;
 
-import by.tms.entity.AbstractVehicle;
+import by.tms.entity.AbstractProduct;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -9,22 +9,22 @@ import java.util.Optional;
 import java.util.concurrent.atomic.AtomicLong;
 
 @Component("inMemoryVehicleStorage")
-public class InMemoryVehicleStorage implements Storage<AbstractVehicle, Long> {
+public class InMemoryProductStorage implements Storage<AbstractProduct, Long> {
 
     private final AtomicLong idVehicleGenerator = new AtomicLong(0);
-    private final List<AbstractVehicle> vehicleList = new ArrayList<>();
+    private final List<AbstractProduct> vehicleList = new ArrayList<>();
 
 
     @Override
-    public AbstractVehicle save(AbstractVehicle vehicle) {
+    public AbstractProduct save(AbstractProduct vehicle) {
         vehicle.setId(idVehicleGenerator.incrementAndGet());
         vehicleList.add(vehicle);
         return vehicle;
     }
 
     @Override
-    public Optional<AbstractVehicle> findById(Long aLong) {
-        for (AbstractVehicle vehicle: vehicleList) {
+    public Optional<AbstractProduct> findById(Long aLong) {
+        for (AbstractProduct vehicle: vehicleList) {
             if (vehicle.getId() == aLong)
                 return Optional.of(vehicle);
         }
@@ -32,20 +32,20 @@ public class InMemoryVehicleStorage implements Storage<AbstractVehicle, Long> {
     }
 
     @Override
-    public AbstractVehicle delete(AbstractVehicle entity) {
+    public AbstractProduct delete(AbstractProduct entity) {
         vehicleList.remove(entity);
         return entity;
     }
 
     @Override
-    public List<AbstractVehicle> getListOfEntity() {
+    public List<AbstractProduct> getListOfEntity() {
         return vehicleList;
     }
 
     @Override
-    public Optional<AbstractVehicle> findEntity(String nameVehicle) {
-        for (AbstractVehicle vehicle: vehicleList) {
-            if(vehicle.getNameVehicle().equals(nameVehicle))
+    public Optional<AbstractProduct> findEntity(String nameVehicle) {
+        for (AbstractProduct vehicle: vehicleList) {
+            if(vehicle.getNameProduct().equals(nameVehicle))
                 return Optional.of(vehicle);
         }
         return Optional.empty();

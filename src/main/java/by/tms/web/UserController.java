@@ -1,5 +1,6 @@
 package by.tms.web;
 
+import by.tms.dto.UserDto;
 import by.tms.entity.Customer;
 import by.tms.entity.Seller;
 import by.tms.entity.User;
@@ -40,37 +41,41 @@ public class UserController {
     }
 
     @PostMapping("/signup")
-    public String signup(@Valid @ModelAttribute("newUser") User user, BindingResult bindingResult
-            //, Model model
-                         ) {
+    public String signup(@Valid @ModelAttribute("newUser") User user, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             return "signup";
         }
-//        if (userService.findUserByEmail(user.getEmail()).isEmpty()) {
+
+        Optional<User> isExist = userService.findUserByEmail(user.getEmail());
+
+        if (isExist.isEmpty()) {
             userService.save(user);
-            System.out.println(user);
+            // System.out.println(user);
             return "redirect:/";
-//        }
-//        model.addAttribute("message", "User is already exists");
-//        return "signup";
+        } else {
+            model.addAttribute("message", "User is already exists");
+            return "signup";
+        }
+
     }
 
 
     @GetMapping("/login")
-    public String login(@ModelAttribute("loginUser") User user) {
+    public String login(@ModelAttribute("loginUser") UserDto userDto) {
         return "login";
     }
 
     @PostMapping("/login")
-    public String login(@Valid @ModelAttribute("loginUser") User user, BindingResult bindingResult, HttpSession httpSession, Model model) {
+    public String login(@Valid @ModelAttribute("loginUser") UserDto userDto, BindingResult bindingResult, HttpSession httpSession, Model model) {
         if (bindingResult.hasErrors()) {
             return "login";
         }
-        Optional<User> userByEmail = userService.findUserByEmail(user.getEmail());
+        Optional<User> userByEmail = userService.findUserByEmail(userDto.getEmail());
         if (userByEmail.isPresent()) {
-            if (userByEmail.get().getPassword().equals(user.getPassword())) {
+            if (userByEmail.get().getPassword().equals(userDto.getPassword())) {
                 httpSession.setAttribute("currentUser", userByEmail.get());
-                return "redirect:/";
+                //System.out.println(userDto);
+                return "personalAccount";
             } else {
                 model.addAttribute("message", "Wrong password");
                 return "login";
@@ -112,4 +117,11 @@ public class UserController {
         httpSession.invalidate();
         return "redirect:/";
     }
+
+    @GetMapping("/personalAccount")
+    public String personalAccount(@Valid @ModelAttribute("personalUserData") User user){
+        return "personalAccount";
+    }
+
+
 }

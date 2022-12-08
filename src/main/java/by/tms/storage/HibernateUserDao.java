@@ -21,7 +21,7 @@ public class HibernateUserDao implements Storage<User, Long> {
     public User save(User user) {
         Session session = sessionFactory.getCurrentSession();
         session.save(user);
-        return null;
+        return user;
     }
 
     @Override
@@ -47,10 +47,16 @@ public class HibernateUserDao implements Storage<User, Long> {
 
     @Override
     public Optional<User> findEntity(String email) {
-        Session  session = sessionFactory.getCurrentSession();
-        User singleResult = session.createQuery("from User where email=:email", User.class)
-                .setParameter("email", email)
-                .getSingleResult();
-        return Optional.of(singleResult);
+//        Session  session = sessionFactory.getCurrentSession();
+
+        for (User u: this.getListOfEntity()) {
+            if(u.getEmail().equals(email)){
+                return Optional.of(u);
+            }
+        }
+//       return Optional.ofNullable(session.createQuery("from User where email=:email", User.class)
+//               .setParameter("email", email)
+//               .getSingleResult());
+        return Optional.empty();
     }
 }

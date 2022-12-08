@@ -15,16 +15,33 @@
 </head>
 <body>
 <s:form action="/user/signup" method="post" modelAttribute="newUser">
+
+    <s:input path="firstName" placeholder="Input first name"/>
+    <br>
+    <s:errors path="firstName" cssStyle="color: red"/>
+    <br>
+    <s:input path="secondName" placeholder="Input second name"/>
+    <br>
+    <s:errors path="secondName" cssStyle="color: red"/>
+    <br>
     <s:input path="email" placeholder="Input email"/>
     <br>
     <s:errors path="email" cssStyle="color: red"/>
+    <br>
+    <s:input path="phone" placeholder="Input phone Number +375"/>
+    <br>
+    <s:errors path="phone" cssStyle="color: red"/>
+    <br>
+    <s:input path="address" placeholder="Input address"/>
+    <br>
+    <s:errors path="address" cssStyle="color: red"/>
     <br>
     <s:input path="password" type="password" placeholder="Input password"/>
     <br>
     <s:errors path="password" cssStyle="color: red"/>
     <br>
     <s:button>Register</s:button>
-    <a href="/index" class="btn btn-primary">Back</a>
+    <a href="/" class="btn btn-primary">Back</a>
     </s:form>
     <p style="color: red">${message}</p>
 

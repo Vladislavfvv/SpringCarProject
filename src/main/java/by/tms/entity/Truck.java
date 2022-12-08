@@ -12,7 +12,7 @@ import javax.validation.constraints.Size;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "trucks")
-public class Truck extends AbstractMotorVehicle{
+public class Truck extends AbstractProduct {
 
     @NotBlank(message = "Field must not be empty")
     @Size(message = "Must contain 1 to 5", min = 1, max = 4)

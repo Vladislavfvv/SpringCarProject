@@ -1,39 +1,35 @@
 package by.tms.entity;
 
 import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-
-
+@Entity
 @AllArgsConstructor
 @Table(name = "offers")
-public class Offer extends AbstractEntity{
+public class Offer extends AbstractEntity {
 
     private LocalDateTime offerDateTime;
-    private AbstractVehicle vehicle;
+
+    @ManyToOne//(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "product_id", nullable = false)
+    private AbstractProduct abstractProduct;
     private String description;
     private BigDecimal price;
-    @OneToOne
-    private Seller seller;
+
+    @ManyToOne
+    private User user;
+
+    public User getUser() {
+        return user;
+    }
 
     public Offer() {
         this.offerDateTime = LocalDateTime.now();
     }
 
-    public Seller getSeller() {
-        return seller;
-    }
-
-    public void setSeller(Seller seller) {
-        this.seller = seller;
-    }
 
     public LocalDateTime getOfferDateTime() {
         return offerDateTime;
@@ -59,11 +55,15 @@ public class Offer extends AbstractEntity{
         this.price = price;
     }
 
-    public AbstractVehicle getVehicle() {
-        return vehicle;
+    public AbstractProduct getAbstractProduct() {
+        return abstractProduct;
     }
 
-    public void setVehicle(AbstractVehicle vehicle) {
-        this.vehicle = vehicle;
+    public void setAbstractProduct(AbstractProduct abstractProduct) {
+        this.abstractProduct = abstractProduct;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }
