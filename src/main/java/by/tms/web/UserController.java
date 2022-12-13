@@ -5,6 +5,7 @@ import by.tms.entity.Customer;
 import by.tms.entity.Seller;
 import by.tms.entity.User;
 import by.tms.service.CustomerService;
+import by.tms.service.OfferService;
 import by.tms.service.SellerService;
 import by.tms.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,8 +27,15 @@ public class UserController {
 
     //    private final SellerService sellerService;
 //    private final CustomerService customerService;
-    @Autowired
-    private UserService userService;
+
+    private final UserService userService;
+    private final OfferService offerService;
+
+    public UserController(UserService userService, OfferService offerService) {
+        this.offerService = offerService;
+        this.userService = userService;
+    }
+
 
 //    public UserController(SellerService sellerService, CustomerService customerService, UserService userService) {
 //        this.sellerService = sellerService;
@@ -50,13 +58,11 @@ public class UserController {
 
         if (isExist.isEmpty()) {
             userService.save(user);
-            // System.out.println(user);
             return "redirect:/";
         } else {
             model.addAttribute("message", "User is already exists");
             return "signup";
         }
-
     }
 
 
@@ -74,6 +80,8 @@ public class UserController {
         if (userByEmail.isPresent()) {
             if (userByEmail.get().getPassword().equals(userDto.getPassword())) {
                 httpSession.setAttribute("currentUser", userByEmail.get());
+//                model.addAttribute("listOfOffers", offerService.findOfferByUser((User) model.getAttribute("currentUser"));
+//                model.addAttribute("listOfOffers", offerService.findOfferByUser((User) httpSession.getAttribute("currentUser")));
                 //System.out.println(userDto);
                 return "personalAccount";
             } else {
@@ -119,7 +127,7 @@ public class UserController {
     }
 
     @GetMapping("/personalAccount")
-    public String personalAccount(@Valid @ModelAttribute("personalUserData") User user){
+    public String personalAccount(@Valid @ModelAttribute("personalUserData") User user) {
         return "personalAccount";
     }
 

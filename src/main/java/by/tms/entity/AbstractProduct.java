@@ -2,6 +2,7 @@ package by.tms.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
+import org.hibernate.validator.constraints.URL;
 
 import javax.persistence.Entity;
 import javax.validation.constraints.NotBlank;
@@ -13,7 +14,8 @@ import javax.validation.constraints.Size;
 public class AbstractProduct extends AbstractEntity {
 
     @NotBlank(message = "Field must not be empty")
-    @Pattern(message = "Must be src link", regexp = "https:.+\\.[\\w]{3,4}")
+    //@Pattern(message = "Must be src link", regexp = "https:.+\\.[\\w]{3,4}")
+    @URL
     private String srcPicture;
 
     @NotBlank(message = "Field must not be empty")

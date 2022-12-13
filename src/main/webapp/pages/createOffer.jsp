@@ -12,14 +12,19 @@
     <title>Create offer</title>
 </head>
 <body>
-<p>Choose what you are selling:</p>
-<a href="/offer/createOffer/addCar">Add car</a>
-<a href="/offer/createOffer/addBus">Add bus</a>
-<a href="/offer/createOffer/addTruck">Add truck</a>
-<a href="/offer/createOffer/addTrailer">Add trailer</a>
-<a href="/offer/createOffer/addTire">Add tire</a>
-<a href="/offer/createOffer/addPart">Add part</a>
-<a href="/offer/createOffer/addCarService">Add carService</a>
+<s:form action="/offer/createOffer" method="post" modelAttribute="OfferDTO">
+    <p>Enter your offer description:</p>
+    <s:input path="description" size="30" placeholder="Description"/>
+    <br>
+    <s:errors path="description"/>
+    <br>
+    <p>Enter your offer price:</p>
+    <s:input path="price" size="30" placeholder="Price"/> BYN</br>
+    <br>
+    <s:errors path="price"/>
+    <br>
+    <s:button>Submit</s:button>
+</s:form>
 
 </body>
 </html>

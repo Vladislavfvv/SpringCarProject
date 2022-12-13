@@ -12,15 +12,18 @@
     <title>Add car</title>
 </head>
 <body>
-<s:form action="/offer/createOffer/addCar" method="post" modelAttribute="newCar">
-    <p>Enter name of car</p>
-    <s:input path="nameProduct" size="30" placeholder="Car name"/>
-    <br>
-    <s:errors path="nameProduct"/>
+<header>
+    <jsp:include page="../header.jsp"></jsp:include>
+</header>
+<s:form action="/offer/addCar" method="post" modelAttribute="newCar">
     <p>Enter Add a link to your car image:</p>
     <s:input path="srcPicture" size="30" placeholder="srcPicture"/>
     <br>
     <s:errors path="srcPicture"/>
+    <p>Enter name of car</p>
+    <s:input path="nameProduct" size="30" placeholder="Car name"/>
+    <br>
+    <s:errors path="nameProduct"/>
     <p>Enter release date of your car:</p>
     <s:input path="releaseDate" size="30" placeholder="Release date"/>
     <br>
@@ -29,24 +32,21 @@
     <s:input path="color" size="30" placeholder="Color"/>
     <br>
     <s:errors path="color"/>
-    <p>Enter type of engine your car:</p>
-<%--    <s:input path="engine" size="30" placeholder="Engine type"/>--%>
-<%--    <br>--%>
-<%--    <s:errors path="engine"/>    <br>--%>
     <p>Enter the producer of your vehicle:</p>
     <s:input path="producer" size="30" placeholder="Producer"/>
     <br>
     <s:errors path="producer"/>
-    <p>Enter your car description:</p>
-<%--    <s:input path="description" size="30" placeholder="Description"/>--%>
-<%--    <br>--%>
-<%--    <s:errors path="description"/>    <br>--%>
-<%--    <p>Enter your car price:</p>--%>
-<%--    <s:input path="price" size="30" placeholder="Price"/> BYN</br>--%>
-<%--    <br>--%>
-<%--    <s:errors path="price"/>--%>
+    <p>Enter the passenger capacity of your car:</p>
+    <s:input path="passengerCapacity" size="30" placeholder="Passenger capacity"/>
+    <br>
+    <s:errors path="passengerCapacity"/>
     <br>
     <s:button>Submit</s:button>
 </s:form>
+<p style="color: red">${message}</p>
+<footer>
+    <jsp:include page="../date.jsp"></jsp:include>
+    <jsp:include page="../footer.jsp"></jsp:include>
+</footer>
 </body>
 </html>

@@ -3,15 +3,13 @@ package by.tms.entity;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
+import javax.persistence.*;
+import javax.validation.constraints.*;
+import java.util.List;
+
 @Entity
-@NoArgsConstructor
-@AllArgsConstructor
+//@NoArgsConstructor
+//@AllArgsConstructor
 @Table(name = "users")
 public class User extends AbstractEntity {
 
@@ -43,15 +41,34 @@ public class User extends AbstractEntity {
     @Pattern(message = "Password must consist of numbers and latin letters!", regexp = "[\\w\\d]+")
     private String password;
 
+    @OneToMany
+    private List<AbstractProduct> productList;
 
+    public List<AbstractProduct> getProductList() {
+        return productList;
+    }
 
-//    public User() {
-//    }
-//
-//    public User(String email, String password) {
-//        this.email = email;
-//        this.password = password;
-//    }
+    public void setProductList(List<AbstractProduct> productList) {
+        this.productList = productList;
+    }
+
+    public User() {
+    }
+
+    public User(String email, String password) {
+        this.email = email;
+        this.password = password;
+    }
+
+    public User(String firstName, String secondName, String email, String phone, String address, String password) {
+        this.firstName = firstName;
+        this.secondName = secondName;
+        this.email = email;
+        this.phone = phone;
+        this.address = address;
+        this.password = password;
+
+    }
 
     public String getEmail() {
         return email;
@@ -101,15 +118,16 @@ public class User extends AbstractEntity {
         this.address = address;
     }
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "firstName='" + firstName + '\'' +
-                ", secondName='" + secondName + '\'' +
-                ", email='" + email + '\'' +
-                ", phone='" + phone + '\'' +
-                ", address='" + address + '\'' +
-                ", password='" + password + '\'' +
-                '}';
-    }
+
+    //    @Override
+//    public String toString() {
+//        return "User{" +
+//                "firstName='" + firstName + '\'' +
+//                ", secondName='" + secondName + '\'' +
+//                ", email='" + email + '\'' +
+//                ", phone='" + phone + '\'' +
+//                ", address='" + address + '\'' +
+//                ", password='" + password + '\'' +
+//                '}';
+//    }
 }

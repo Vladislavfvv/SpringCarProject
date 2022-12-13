@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class OfferService {
@@ -26,8 +27,7 @@ public class OfferService {
     public Offer createOfferWithUserAndVehicleCategory(User user, AbstractProduct abstractProduct){
         Offer offer = new Offer();
         offer.setAbstractProduct(abstractProduct);
-        //offer.setSeller(seller);
-        //offer.
+        offer.setUser(user);
         return offer;
     }
 
@@ -35,15 +35,19 @@ public class OfferService {
         return offerService.findById(id);
     }
 
+    public List<Offer> findOfferByUser(User user){
+        return offerService.getListOfEntity().stream().filter(offer -> offer.getUser().equals(user)).collect(Collectors.toList());
+    }
 
     public Offer delete(Offer offer) {
         offerService.delete(offer);
         return offer;
     }
 
-    public List<Offer> getOfferList() {
+    public  List<Offer> getOfferList() {
         return offerService.getListOfEntity();
     }
+
 
 
 }

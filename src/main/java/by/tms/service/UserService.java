@@ -11,11 +11,12 @@ import java.util.Optional;
 
 @Service
 public class UserService {
-    @Autowired
     //@Qualifier("inMemoryUserStorage")
-    @Qualifier("hibernateUserDao")
-    private Storage<User, Long> userService;
+    private final Storage<User, Long> userService;
 
+    public UserService(@Qualifier("hibernateUserDao") Storage<User, Long> userService) {
+        this.userService = userService;
+    }
 
 
     public User save(User user){

@@ -1,7 +1,6 @@
 package by.tms.storage;
 
 import by.tms.entity.AbstractProduct;
-import by.tms.entity.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +12,7 @@ import java.util.Optional;
 
 @Repository
 @Transactional
-public class HibernateProductDao implements Storage<AbstractProduct, Long> {
+public class HibernateAbstractProductDao implements Storage<AbstractProduct, Long> {
 
     @Autowired
     private SessionFactory sessionFactory;

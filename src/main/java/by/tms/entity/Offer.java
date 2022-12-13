@@ -5,9 +5,9 @@ import lombok.AllArgsConstructor;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
-@AllArgsConstructor
 @Table(name = "offers")
 public class Offer extends AbstractEntity {
 
@@ -30,6 +30,13 @@ public class Offer extends AbstractEntity {
         this.offerDateTime = LocalDateTime.now();
     }
 
+    public Offer(LocalDateTime offerDateTime, AbstractProduct abstractProduct, String description, BigDecimal price, User user) {
+        this.offerDateTime = offerDateTime;
+        this.abstractProduct = abstractProduct;
+        this.description = description;
+        this.price = price;
+        this.user = user;
+    }
 
     public LocalDateTime getOfferDateTime() {
         return offerDateTime;
@@ -55,15 +62,17 @@ public class Offer extends AbstractEntity {
         this.price = price;
     }
 
+
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
     public AbstractProduct getAbstractProduct() {
         return abstractProduct;
     }
 
     public void setAbstractProduct(AbstractProduct abstractProduct) {
         this.abstractProduct = abstractProduct;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
     }
 }
