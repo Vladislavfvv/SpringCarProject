@@ -13,7 +13,7 @@
 </head>
 <body>
 <header>
-    <jsp:include page="../header.jsp"></jsp:include>
+    <jsp:include page="../user/header.jsp"></jsp:include>
 </header>
 <s:form action="/offer/addCar" method="post" modelAttribute="newCar">
     <p>Enter Add a link to your car image:</p>
@@ -46,7 +46,7 @@
 <p style="color: red">${message}</p>
 <footer>
     <jsp:include page="../date.jsp"></jsp:include>
-    <jsp:include page="../footer.jsp"></jsp:include>
+    <jsp:include page="../user/footer.jsp"></jsp:include>
 </footer>
 </body>
 </html>

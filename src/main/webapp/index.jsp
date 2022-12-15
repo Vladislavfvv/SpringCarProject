@@ -13,10 +13,10 @@
             integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
             crossorigin="anonymous"></script>
 
-    <link rel="stylesheet" type="text/css" href="/pages/header.css">
+    <link rel="stylesheet" type="text/css" href="/pages/user/header.css">
 </head>
 <header>
-    <jsp:include page="/pages/header.jsp"></jsp:include>
+    <jsp:include page="/pages/user/header.jsp"></jsp:include>
 </header>
 
 
@@ -89,7 +89,7 @@
 <%--        crossorigin="anonymous"></script>--%>
 <footer>
     <jsp:include page="/pages/date.jsp"></jsp:include>
-    <jsp:include page="/pages/footer.jsp"></jsp:include>
+    <jsp:include page="/pages/user/footer.jsp"></jsp:include>
 </footer>
 </body>
 </html>

@@ -1,14 +1,9 @@
 package by.tms.web;
 
 import by.tms.dto.UserDto;
-import by.tms.entity.Customer;
-import by.tms.entity.Seller;
 import by.tms.entity.User;
-import by.tms.service.CustomerService;
 import by.tms.service.OfferService;
-import by.tms.service.SellerService;
 import by.tms.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -45,13 +40,13 @@ public class UserController {
 
     @GetMapping("/signup")
     public String signup(@ModelAttribute("newUser") User user) {
-        return "signup";
+        return "/user/signup";
     }
 
     @PostMapping("/signup")
     public String signup(@Valid @ModelAttribute("newUser") User user, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
-            return "signup";
+            return "/user/signup";
         }
 
         Optional<User> isExist = userService.findUserByEmail(user.getEmail());
@@ -61,20 +56,20 @@ public class UserController {
             return "redirect:/";
         } else {
             model.addAttribute("message", "User is already exists");
-            return "signup";
+            return "/user/signup";
         }
     }
 
 
     @GetMapping("/login")
     public String login(@ModelAttribute("loginUser") UserDto userDto) {
-        return "login";
+        return "user/login";
     }
 
     @PostMapping("/login")
     public String login(@Valid @ModelAttribute("loginUser") UserDto userDto, BindingResult bindingResult, HttpSession httpSession, Model model) {
         if (bindingResult.hasErrors()) {
-            return "login";
+            return "user/login";
         }
         Optional<User> userByEmail = userService.findUserByEmail(userDto.getEmail());
         if (userByEmail.isPresent()) {
@@ -83,15 +78,15 @@ public class UserController {
 //                model.addAttribute("listOfOffers", offerService.findOfferByUser((User) model.getAttribute("currentUser"));
 //                model.addAttribute("listOfOffers", offerService.findOfferByUser((User) httpSession.getAttribute("currentUser")));
                 //System.out.println(userDto);
-                return "personalAccount";
+                return "user/personalAccount";
             } else {
                 model.addAttribute("message", "Wrong password");
-                return "login";
+                return "user/login";
             }
 
         } else {
             model.addAttribute("message", "No such user");
-            return "login";
+            return "user/login";
         }
     }
 
@@ -127,9 +122,13 @@ public class UserController {
     }
 
     @GetMapping("/personalAccount")
-    public String personalAccount(@Valid @ModelAttribute("personalUserData") User user) {
-        return "personalAccount";
+    public String personalAccount(/*@Valid @ModelAttribute("personalUserData") User user*/) {
+        return "user/personalAccount";
     }
+//    @PostMapping("/personalAccount")
+//    public String personalAccount(/*@Valid @ModelAttribute("personalUserData") User user*/) {
+//        return "user/personalAccount";
+//    }
 
 
 }

@@ -65,7 +65,7 @@
                     </li>
                     <li class="nav-item">
                         <a href="${pageContext.request.contextPath}/user/signup" methods="get"
-                           class="nav-link link-dark px-2">SignUp
+                           class="nav-link link-dark px-2 btn btn-primary">SignUp
                         </a>
                     </li>
                 </c:if>

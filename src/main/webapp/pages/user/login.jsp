@@ -25,11 +25,11 @@
     <br>
     <s:errors path="password" cssStyle="color: red"></s:errors>
     <br>
-    <s:button>Login</s:button>
+    <s:button class="btn btn-primary">Login</s:button>
 </s:form>
 <p style="color: red">${message}</p>
 <h1>Not registered yet?</h1>
-<a href="/user/signup">SignUp</a>
+<a href="/user/signup" class="btn btn-primary">SignUp</a>
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
       integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">

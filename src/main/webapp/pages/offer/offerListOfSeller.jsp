@@ -12,9 +12,9 @@
     <title>Offer List of seller</title>
 </head>
 <body>
-<ul>
-    <jsp:useBean id="listOfOffers" scope="request" type="by.tms.web.OfferController"/>
-    <c:if test="${listOfOffers != null}">
+<%--<jsp:useBean id="listOfOffers" scope="request" type="by.tms.web.OfferController"/>--%>
+<c:if test="${listOfOffers != null}">
+    <ul>
         <c:forEach items="${listOfOffers}" var="offer">
             <li>
                 <c:out value="${offer.abstractProduct.nameProduct}"></c:out>
@@ -23,8 +23,8 @@
                 <c:out value="${offer.offerDateTime}"></c:out>
             </li>
         </c:forEach>
-    </c:if>
-</ul>
+    </ul>
+</c:if>
 
 
 <c:if test="${listOfOffers == null}">

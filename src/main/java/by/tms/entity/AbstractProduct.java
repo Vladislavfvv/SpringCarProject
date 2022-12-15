@@ -5,9 +5,11 @@ import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.URL;
 
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+import java.util.List;
 
 
 @Entity
@@ -35,15 +37,31 @@ public class AbstractProduct extends AbstractEntity {
     @Size(message = "Must be year of release", min = 4, max = 4)
     private String releaseDate;
 
+    @ManyToOne
+    private Category category;
+
+    public AbstractProduct(String srcPicture, String nameProduct, String color, String producer, String releaseDate) {
+        super();
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
     public AbstractProduct() {
     }
 
-    public AbstractProduct(String srcPicture, String nameProduct, String color, String producer, String releaseDate) {
+    public AbstractProduct(String srcPicture, String nameProduct, String color, String producer, String releaseDate, Category category) {
         this.srcPicture = srcPicture;
         this.nameProduct = nameProduct;
         this.color = color;
         this.producer = producer;
         this.releaseDate = releaseDate;
+        this.category = category;
     }
 
     public String getSrcPicture() {

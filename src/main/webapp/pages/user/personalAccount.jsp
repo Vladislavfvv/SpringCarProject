@@ -60,7 +60,7 @@
     <p>You haven't offers</p>
 </c:if>
     <br>
-    <a href="${pageContext.request.contextPath}/user/logout">Logout</a>
+    <a href="${pageContext.request.contextPath}/user/logout" class="btn btn-primary">Logout</a>
     <br>
 
 

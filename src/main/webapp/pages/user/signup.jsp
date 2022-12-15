@@ -40,7 +40,7 @@
     <br>
     <s:errors path="password" cssStyle="color: red"/>
     <br>
-    <s:button>Register</s:button>
+    <s:button class="btn btn-primary">Register</s:button>
     <a href="/" class="btn btn-primary">Back</a>
     </s:form>
     <p style="color: red">${message}</p>

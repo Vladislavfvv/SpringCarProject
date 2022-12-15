@@ -48,14 +48,14 @@ public class AbstractProductService {
                 productList = getCarList();
                 break;
             }
-            case ("tire"): {
-                productList = getTireList();
-                break;
-            }
-            case ("trailer"): {
-                productList = getTrailerList();
-                break;
-            }
+//            case ("tire"): {
+//                productList = getTireList();
+//                break;
+//            }
+//            case ("trailer"): {
+//                productList = getTrailerList();
+//                break;
+//            }
             case ("truck"): {
                 productList = getTruckList();
                 break;
@@ -66,27 +66,27 @@ public class AbstractProductService {
 
     }
 
-    private List<AbstractProduct> getTrailerList() {
-        List<AbstractProduct> listOfEntity = abstractProductService.getListOfEntity();
-        List<AbstractProduct> abstractProductList = null;
-        for (AbstractProduct abstractProduct : listOfEntity) {
-            if (abstractProduct instanceof Trailer) {
-                abstractProductList.add(abstractProduct);
-            }
-        }
-        return abstractProductList;
-    }
+//    private List<AbstractProduct> getTrailerList() {
+//        List<AbstractProduct> listOfEntity = abstractProductService.getListOfEntity();
+//        List<AbstractProduct> abstractProductList = null;
+//        for (AbstractProduct abstractProduct : listOfEntity) {
+//            if (abstractProduct instanceof Trailer) {
+//                abstractProductList.add(abstractProduct);
+//            }
+//        }
+//        return abstractProductList;
+//    }
 
-    private List<AbstractProduct> getTireList() {
-        List<AbstractProduct> listOfEntity = abstractProductService.getListOfEntity();
-        List<AbstractProduct> abstractProductList = null;
-        for (AbstractProduct abstractProduct : listOfEntity) {
-            if (abstractProduct instanceof Tire) {
-                abstractProductList.add(abstractProduct);
-            }
-        }
-        return abstractProductList;
-    }
+//    private List<AbstractProduct> getTireList() {
+//        List<AbstractProduct> listOfEntity = abstractProductService.getListOfEntity();
+//        List<AbstractProduct> abstractProductList = null;
+//        for (AbstractProduct abstractProduct : listOfEntity) {
+//            if (abstractProduct instanceof Tire) {
+//                abstractProductList.add(abstractProduct);
+//            }
+//        }
+//        return abstractProductList;
+//    }
 
     private List<AbstractProduct> getBusList() {
         List<AbstractProduct> listOfEntity = abstractProductService.getListOfEntity();
@@ -125,7 +125,13 @@ public class AbstractProductService {
     }
 
     public String getPageNameForProduct(String productCategory){
-        return "addOfferUser/select" + productCategory;
+        return "offer/add" + productCategory;
+    }
+
+    public AbstractProduct createAbstractProductWithProductAndCategoryVehicle(Category category, AbstractProduct abstractProduct){
+        AbstractProduct abstractProductNew = new AbstractProduct();
+        abstractProductNew.setCategory(category);
+        return abstractProductNew;
     }
 
 }
