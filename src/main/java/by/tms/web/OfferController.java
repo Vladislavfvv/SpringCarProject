@@ -5,6 +5,7 @@ import by.tms.entity.*;
 import by.tms.service.AbstractProductService;
 import by.tms.service.CategoryService;
 import by.tms.service.OfferService;
+import by.tms.service.CarService;
 import by.tms.service.mapper.OfferMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,12 +23,14 @@ public class OfferController {
 
     private final OfferService offerService;
     private final AbstractProductService abstractProductService;
+    private final CarService carService;
     private final OfferMapper offerMapper;
     private final CategoryService categoryservice;
 
-    public OfferController(OfferService offerService, AbstractProductService abstractProductService, OfferMapper offerMapper, CategoryService categoryService) {
+    public OfferController(OfferService offerService, AbstractProductService abstractProductService, CarService carService, OfferMapper offerMapper, CategoryService categoryService) {
         this.offerService = offerService;
         this.abstractProductService = abstractProductService;
+        this.carService = carService;
         this.offerMapper = offerMapper;
         this.categoryservice = categoryService;
     }
@@ -112,7 +115,9 @@ public class OfferController {
         if (bindingResult.hasErrors()) {
             return "/offer/addCar";
         }
-        Optional<AbstractProduct> isExist = abstractProductService.findProductByName(car.getNameProduct());
+
+        Optional<AbstractVehicle> isExist = carService.findVehicleByName(car.getNameProduct());
+        //////////Optional<AbstractProduct> isExist = abstractProductService.findProductByName(car.getNameProduct());
         if (isExist.isPresent()) {
             model.addAttribute("message", "Car is already exists");
             return "/offer/addCar";
@@ -123,7 +128,8 @@ public class OfferController {
 
         User addCurrentUser = (User) httpSession.getAttribute("currentUser");
         car.setUser(addCurrentUser);
-        AbstractProduct newCar = abstractProductService.save(car);
+        AbstractVehicle newCar = carService.save(car);
+       ///////// AbstractProduct newCar = abstractProductService.save(car);
         //Seller seller =
 //            Offer offer = offerService.createOfferWithUserAndVehicleCategory(addCurrentUser, newCar);
 //

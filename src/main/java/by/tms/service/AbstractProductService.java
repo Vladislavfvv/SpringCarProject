@@ -40,14 +40,14 @@ public class AbstractProductService {
         }
         List<AbstractProduct> productList = null;
         switch (productCategory) {
-            case ("bus"): {
-                productList = getBusList();
-                break;
-            }
-            case ("car"): {
-                productList = getCarList();
-                break;
-            }
+//            case ("bus"): {
+//                productList = getBusList();
+//                break;
+//            }
+//            case ("car"): {
+//                productList = getCarList();
+//                break;
+//            }
 //            case ("tire"): {
 //                productList = getTireList();
 //                break;
@@ -56,10 +56,10 @@ public class AbstractProductService {
 //                productList = getTrailerList();
 //                break;
 //            }
-            case ("truck"): {
-                productList = getTruckList();
-                break;
-            }
+//            case ("truck"): {
+//                productList = getTruckList();
+//                break;
+//            }
 
         }
         return productList;
@@ -88,33 +88,33 @@ public class AbstractProductService {
 //        return abstractProductList;
 //    }
 
-    private List<AbstractProduct> getBusList() {
-        List<AbstractProduct> listOfEntity = abstractProductService.getListOfEntity();
-        List<AbstractProduct> abstractProductList = null;
-        for (AbstractProduct abstractProduct : listOfEntity) {
-            if (abstractProduct instanceof Bus) {
-                abstractProductList.add(abstractProduct);
-            }
-        }
-        return abstractProductList;
-    }
-
-    private List<AbstractProduct> getTruckList() {
-        List<AbstractProduct> listOfEntity = abstractProductService.getListOfEntity();
-        List<AbstractProduct> abstractProductList = null;
-        for (AbstractProduct abstractProduct : listOfEntity) {
-            if (abstractProduct instanceof Truck) {
-                abstractProductList.add(abstractProduct);
-            }
-        }
-        return abstractProductList;
-    }
-
-
-    private List<AbstractProduct> getCarList() {
-        List<AbstractProduct> listOfEntity = abstractProductService.getListOfEntity();
-        return listOfEntity.stream().filter(abstractProduct -> abstractProduct instanceof Car).toList();
-    }
+//    private List<AbstractProduct> getBusList() {
+//        List<AbstractProduct> listOfEntity = abstractProductService.getListOfEntity();
+//        List<AbstractProduct> abstractProductList = null;
+//        for (AbstractProduct abstractProduct : listOfEntity) {
+//            if (abstractProduct instanceof Bus) {
+//                abstractProductList.add(abstractProduct);
+//            }
+//        }
+//        return abstractProductList;
+//    }
+//
+//    private List<AbstractProduct> getTruckList() {
+//        List<AbstractProduct> listOfEntity = abstractProductService.getListOfEntity();
+//        List<AbstractProduct> abstractProductList = null;
+//        for (AbstractProduct abstractProduct : listOfEntity) {
+//            if (abstractProduct instanceof Truck) {
+//                abstractProductList.add(abstractProduct);
+//            }
+//        }
+//        return abstractProductList;
+//    }
+//
+//
+//    private List<AbstractProduct> getCarList() {
+//        List<AbstractProduct> listOfEntity = abstractProductService.getListOfEntity();
+//        return listOfEntity.stream().filter(abstractProduct -> abstractProduct instanceof Car).toList();
+//    }
 
     private void fillProductListToTest() {
 //        save(new Car("https://klike.net/uploads/posts/2019-05/1559021799_1.jpg", "Chevrolet", "yellow", "Lada", "2010", 2));

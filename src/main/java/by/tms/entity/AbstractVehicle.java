@@ -1,20 +1,15 @@
 package by.tms.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.URL;
 
-import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
-import java.util.List;
 
-
-@Entity
-public abstract class AbstractProduct extends AbstractEntity {
+@MappedSuperclass
+public abstract class AbstractVehicle extends AbstractEntity{
 
     @NotBlank(message = "Field must not be empty")
     //@Pattern(message = "Must be src link", regexp = "https:.+\\.[\\w]{3,4}")
@@ -40,40 +35,24 @@ public abstract class AbstractProduct extends AbstractEntity {
     @ManyToOne
     private User user;
 
-//    @ManyToOne
-//    private Category category;
-
-//    public AbstractProduct(String srcPicture, String nameProduct, String color, String producer, String releaseDate) {
-//        super();
-//    }
-
-//    public Category getCategory() {
-//        return category;
-//    }
-//
-//    public void setCategory(Category category) {
-//        this.category = category;
-//    }
-
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public AbstractProduct() {
-    }
-
-    public AbstractProduct(String srcPicture, String nameProduct, String color, String producer, String releaseDate, User user) {
+    public AbstractVehicle(String srcPicture, String nameProduct, String color, String producer, String releaseDate, User user) {
         this.srcPicture = srcPicture;
         this.nameProduct = nameProduct;
         this.color = color;
         this.producer = producer;
         this.releaseDate = releaseDate;
         this.user = user;
+    }
+
+    public AbstractVehicle() {
+    }
+
+    public AbstractVehicle(String srcPicture, String nameProduct, String color, String producer, String releaseDate) {
+        this.srcPicture = srcPicture;
+        this.nameProduct = nameProduct;
+        this.color = color;
+        this.producer = producer;
+        this.releaseDate = releaseDate;
     }
 
     public String getSrcPicture() {
@@ -114,5 +93,13 @@ public abstract class AbstractProduct extends AbstractEntity {
 
     public void setReleaseDate(String releaseDate) {
         this.releaseDate = releaseDate;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

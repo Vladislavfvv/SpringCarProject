@@ -29,13 +29,13 @@
 
 
 
-<a href="/offer/selectProductCategory/?product=newCar">Add car</a><br>
-<a href="/offer/selectProductCategory/?product=newBus">Add bus</a><br>
-<a href="/offer/selectProductCategory/?product=newTruck">Add truck</a><br>
-<a href="/offer/selectProductCategory/?product=newMotorbike">Add motorbike</a><br>
-<a href="/offer/selectProductCategory/?product=newTrailer">Add trailer</a><br>
-<a href="/offer/selectProductCategory/?product=newTire">Add tire</a><br>
-<a href="/offer/selectProductCategory/?product=newPart">Add part</a><br>
+<%--<a href="/offer/selectProductCategory/?product=newCar">Add car</a><br>--%>
+<%--<a href="/offer/selectProductCategory/?product=newBus">Add bus</a><br>--%>
+<%--<a href="/offer/selectProductCategory/?product=newTruck">Add truck</a><br>--%>
+<%--<a href="/offer/selectProductCategory/?product=newMotorbike">Add motorbike</a><br>--%>
+<%--<a href="/offer/selectProductCategory/?product=newTrailer">Add trailer</a><br>--%>
+<%--<a href="/offer/selectProductCategory/?product=newTire">Add tire</a><br>--%>
+<%--<a href="/offer/selectProductCategory/?product=newPart">Add part</a><br>--%>
 
 
 <br>
