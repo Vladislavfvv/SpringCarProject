@@ -117,21 +117,21 @@ public class AbstractProductService {
     }
 
     private void fillProductListToTest() {
-        save(new Car("https://klike.net/uploads/posts/2019-05/1559021799_1.jpg", "Chevrolet", "yellow", "Lada", "2010", 2));
-        save(new Car("https://bipbap.ru/wp-content/uploads/2017/09/92830063_0031-2.jpg", "Peugeot", "violet", "MustafaInc", "2015", 2));
-        save(new Car("https://klike.net/uploads/posts/2019-06/1560838551_1.jpg", "Bugatti", "yellow", "AmarettoInc", "2017", 2));
-        save(new Car("https://kartinkin.net/uploads/posts/2022-03/1648047156_3-kartinkin-net-p-krasivie-kartinki-avto-4.jpg", "Leksah", "blue", "Ford", "2016", 4));
-        save(new Car("https://klike.net/uploads/posts/2021-12/1638432889_2.jpg", "Maserati", "orange", "Noname", "2010", 2));
+//        save(new Car("https://klike.net/uploads/posts/2019-05/1559021799_1.jpg", "Chevrolet", "yellow", "Lada", "2010", 2));
+//        save(new Car("https://bipbap.ru/wp-content/uploads/2017/09/92830063_0031-2.jpg", "Peugeot", "violet", "MustafaInc", "2015", 2));
+//        save(new Car("https://klike.net/uploads/posts/2019-06/1560838551_1.jpg", "Bugatti", "yellow", "AmarettoInc", "2017", 2));
+//        save(new Car("https://kartinkin.net/uploads/posts/2022-03/1648047156_3-kartinkin-net-p-krasivie-kartinki-avto-4.jpg", "Leksah", "blue", "Ford", "2016", 4));
+//        save(new Car("https://klike.net/uploads/posts/2021-12/1638432889_2.jpg", "Maserati", "orange", "Noname", "2010", 2));
     }
 
     public String getPageNameForProduct(String productCategory){
         return "offer/add" + productCategory;
     }
 
-    public AbstractProduct createAbstractProductWithProductAndCategoryVehicle(Category category, AbstractProduct abstractProduct){
-        AbstractProduct abstractProductNew = new AbstractProduct();
-        abstractProductNew.setCategory(category);
-        return abstractProductNew;
-    }
+//    public AbstractProduct createAbstractProductWithProductAndCategoryVehicle(Category category, AbstractProduct abstractProduct){
+//        AbstractProduct abstractProductNew = new AbstractProduct();
+//        abstractProductNew.setCategory(category);
+//        return abstractProductNew;
+//    }
 
 }

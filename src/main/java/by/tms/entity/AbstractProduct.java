@@ -6,6 +6,7 @@ import org.hibernate.validator.constraints.URL;
 
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
+import javax.persistence.MappedSuperclass;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
@@ -13,7 +14,7 @@ import java.util.List;
 
 
 @Entity
-public class AbstractProduct extends AbstractEntity {
+public abstract class AbstractProduct extends AbstractEntity {
 
     @NotBlank(message = "Field must not be empty")
     //@Pattern(message = "Must be src link", regexp = "https:.+\\.[\\w]{3,4}")
@@ -37,31 +38,42 @@ public class AbstractProduct extends AbstractEntity {
     @Size(message = "Must be year of release", min = 4, max = 4)
     private String releaseDate;
 
+//    @ManyToOne
+//    private Category category;
+
+//    public AbstractProduct(String srcPicture, String nameProduct, String color, String producer, String releaseDate) {
+//        super();
+//    }
+
+//    public Category getCategory() {
+//        return category;
+//    }
+//
+//    public void setCategory(Category category) {
+//        this.category = category;
+//    }
+
     @ManyToOne
-    private Category category;
+    private User user;
 
-    public AbstractProduct(String srcPicture, String nameProduct, String color, String producer, String releaseDate) {
-        super();
+    public User getUser() {
+        return user;
     }
 
-    public Category getCategory() {
-        return category;
-    }
-
-    public void setCategory(Category category) {
-        this.category = category;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public AbstractProduct() {
     }
 
-    public AbstractProduct(String srcPicture, String nameProduct, String color, String producer, String releaseDate, Category category) {
+    public AbstractProduct(String srcPicture, String nameProduct, String color, String producer, String releaseDate, User user) {
         this.srcPicture = srcPicture;
         this.nameProduct = nameProduct;
         this.color = color;
         this.producer = producer;
         this.releaseDate = releaseDate;
-        this.category = category;
+        this.user = user;
     }
 
     public String getSrcPicture() {

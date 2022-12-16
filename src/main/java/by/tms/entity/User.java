@@ -41,27 +41,27 @@ public class User extends AbstractEntity {
     @Pattern(message = "Password must consist of numbers and latin letters!", regexp = "[\\w\\d]+")
     private String password;
 
-//    @OneToMany
-//    private List<AbstractProduct> productList;
-//
-//    public List<AbstractProduct> getProductList() {
-//        return productList;
-//    }
-//
-//    public void setProductList(List<AbstractProduct> productList) {
-//        this.productList = productList;
-//    }
-
-    public List<Offer> getOfferList() {
-        return offerList;
-    }
-
-    public void setOfferList(List<Offer> offerList) {
-        this.offerList = offerList;
-    }
-
     @OneToMany
-    private List<Offer> offerList;
+    private List<AbstractProduct> productList;
+
+    public List<AbstractProduct> getProductList() {
+        return productList;
+    }
+
+    public void setProductList(List<AbstractProduct> productList) {
+        this.productList = productList;
+    }
+
+//    public List<Offer> getOfferList() {
+//        return offerList;
+//    }
+//
+//    public void setOfferList(List<Offer> offerList) {
+//        this.offerList = offerList;
+//    }
+//
+//    @OneToMany
+//    private List<Offer> offerList;
 
     public User() {
     }
@@ -81,14 +81,17 @@ public class User extends AbstractEntity {
 
     }
 
-    public User(String firstName, String secondName, String email, String phone, String address, String password, List<Offer> offerList) {
+    public User(String firstName, String secondName, String email, String phone, String address, String password,
+                //List<Offer> offerList
+                List<AbstractProduct> productList ) {
         this.firstName = firstName;
         this.secondName = secondName;
         this.email = email;
         this.phone = phone;
         this.address = address;
         this.password = password;
-        this.offerList = offerList;
+        //this.offerList = offerList;
+        this.productList = productList;
     }
 
     public String getEmail() {

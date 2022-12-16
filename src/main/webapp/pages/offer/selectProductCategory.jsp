@@ -55,14 +55,14 @@
 <br><br>
 
 
-<s:form action="/offer/selectProductCategory" method="post" modelAttribute="newCategory">
-    <c:forEach items="${sessionScope.offer.}" var="productCategory">
-        <input id="radioId" type="radio" name="productCategory" value="${productCategory}">
-        <label for="radioId">${productCategory}</label>
-        <br>
-    </c:forEach>
-    <s:button class="btn btn-primary">Car</s:button>
+<%--<s:form action="/offer/selectProductCategory" method="post" modelAttribute="newCategory">--%>
+<%--    <c:forEach items="${sessionScope.offer.}" var="productCategory">--%>
+<%--        <input id="radioId" type="radio" name="productCategory" value="${productCategory}">--%>
+<%--        <label for="radioId">${productCategory}</label>--%>
+<%--        <br>--%>
+<%--    </c:forEach>--%>
+<%--    <s:button class="btn btn-primary">Car</s:button>--%>
 
-</s:form>
+<%--</s:form>--%>
 </body>
 </html>

@@ -68,7 +68,7 @@ public class OfferController {
 //        List<AbstractProduct> productList = abstractProductService.getAbstractProductList(productCategory);
 //        model.addAttribute("productList", productList);
             return "offer/saveCategory";
-                    //abstractProductService.getPageNameForProduct("newCategory");//abstractProductService.getPageNameForProduct(productCategory);
+            //abstractProductService.getPageNameForProduct("newCategory");//abstractProductService.getPageNameForProduct(productCategory);
         }
     }
 
@@ -113,28 +113,30 @@ public class OfferController {
             return "/offer/addCar";
         }
         Optional<AbstractProduct> isExist = abstractProductService.findProductByName(car.getNameProduct());
-        if (isExist.isEmpty()) {
+        if (isExist.isPresent()) {
+            model.addAttribute("message", "Car is already exists");
+            return "/offer/addCar";
+        }
 //            Category categoryCar = (Category) model.getAttribute("category");
-            Category categoryCar = (Category) httpSession.getAttribute("categoryNewHttp2Object");
-            car.setCategory(categoryCar);
+//            Category categoryCar = (Category) httpSession.getAttribute("categoryNewHttp2Object");
+//            car.setCategory(categoryCar);
 
-            AbstractProduct newCar = abstractProductService.save(car);
-            User addCurrentUser = (User) httpSession.getAttribute("currentUser");
-            //Seller seller =
-            Offer offer = offerService.createOfferWithUserAndVehicleCategory(addCurrentUser, newCar);
-
-            httpSession.setAttribute("offer", offer);
+        User addCurrentUser = (User) httpSession.getAttribute("currentUser");
+        car.setUser(addCurrentUser);
+        AbstractProduct newCar = abstractProductService.save(car);
+        //Seller seller =
+//            Offer offer = offerService.createOfferWithUserAndVehicleCategory(addCurrentUser, newCar);
+//
+//            httpSession.setAttribute("offer", offer);
 //            System.out.println(car);
 //            System.out.println(offer);
 
-            return "offer/completedOffer";
+        return "offer/completedOffer";
 //            return "redirect:/user/personalAccount";
-        }
-
-        model.addAttribute("message", "Car is already exists");
-        return "/offer/addCar";
-//        return "redirect:/user/personalAccount";
     }
+
+
+//        return "redirect:/user/personalAccount";
 
 
 

@@ -22,8 +22,8 @@ public class Car extends AbstractProduct {
     public Car() {
     }
 
-    public Car(String srcPicture, String nameProduct, String color, String producer, String releaseDate, int passengerCapacity) {
-        super(srcPicture, nameProduct, color, producer, releaseDate);
+    public Car(String srcPicture, String nameProduct, String color, String producer, String releaseDate, User user, int passengerCapacity) {
+        super(srcPicture, nameProduct, color, producer, releaseDate, user);
         this.passengerCapacity = passengerCapacity;
     }
 
