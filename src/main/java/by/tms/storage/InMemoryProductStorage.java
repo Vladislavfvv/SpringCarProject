@@ -1,6 +1,7 @@
 package by.tms.storage;
 
 import by.tms.entity.AbstractProduct;
+import by.tms.entity.User;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -48,6 +49,11 @@ public class InMemoryProductStorage implements Storage<AbstractProduct, Long> {
             if(vehicle.getNameProduct().equals(nameVehicle))
                 return Optional.of(vehicle);
         }
+        return Optional.empty();
+    }
+
+    @Override
+    public Optional<AbstractProduct> findVehicleByOwner(User currentUser) {
         return Optional.empty();
     }
 }

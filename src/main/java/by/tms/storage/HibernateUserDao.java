@@ -59,4 +59,9 @@ public class HibernateUserDao implements Storage<User, Long> {
 //               .getSingleResult());
         return Optional.empty();
     }
+
+    @Override
+    public Optional<User> findVehicleByOwner(User currentUser) {
+        return Optional.empty();
+    }
 }

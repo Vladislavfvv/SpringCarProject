@@ -51,4 +51,9 @@ public class InMemoryUserStorage implements Storage<User, Long> {
         }
         return Optional.empty();
     }
+
+    @Override
+    public Optional<User> findVehicleByOwner(User currentUser) {
+        return Optional.empty();
+    }
 }

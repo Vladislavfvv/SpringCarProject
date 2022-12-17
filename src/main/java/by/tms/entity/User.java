@@ -42,17 +42,17 @@ public class User extends AbstractEntity {
     private String password;
 
     @OneToMany
-    private List<AbstractProduct> productList;
+    private List<Car> carList;
 
-    public List<AbstractProduct> getProductList() {
-        return productList;
+    public List<Car> getCarList() {
+        return carList;
     }
 
-    public void setProductList(List<AbstractProduct> productList) {
-        this.productList = productList;
+    public void setCarList(List<Car> carList) {
+        this.carList = carList;
     }
 
-//    public List<Offer> getOfferList() {
+    //    public List<Offer> getOfferList() {
 //        return offerList;
 //    }
 //
@@ -83,7 +83,7 @@ public class User extends AbstractEntity {
 
     public User(String firstName, String secondName, String email, String phone, String address, String password,
                 //List<Offer> offerList
-                List<AbstractProduct> productList ) {
+                List<Car> carList ) {
         this.firstName = firstName;
         this.secondName = secondName;
         this.email = email;
@@ -91,7 +91,7 @@ public class User extends AbstractEntity {
         this.address = address;
         this.password = password;
         //this.offerList = offerList;
-        this.productList = productList;
+        this.carList = carList;
     }
 
     public String getEmail() {

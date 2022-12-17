@@ -1,6 +1,7 @@
 package by.tms.storage;
 
 import by.tms.entity.AbstractVehicle;
+import by.tms.entity.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Repository;
@@ -47,6 +48,31 @@ public class HibernateCarDao implements Storage<AbstractVehicle, Long> {
         return carListList;
     }
 
+
+    public List<AbstractVehicle> getListOfEntityCar() {
+        Session session = sessionFactory.getCurrentSession();
+        List<AbstractVehicle> carListList = session.createQuery("from Car", AbstractVehicle.class).getResultList();
+        return carListList;
+    }
+
+    public List<AbstractVehicle> getListOfEntityCarByUser(User user) {
+        Session session = sessionFactory.getCurrentSession();
+        List<AbstractVehicle> carListList = session.createQuery("from Car where Car.user.id = user.id", AbstractVehicle.class).getResultList();
+        return carListList;
+    }
+
+    public List<AbstractVehicle> getListOfEntityBus() {
+        Session session = sessionFactory.getCurrentSession();
+        List<AbstractVehicle> carListList = session.createQuery("from Bus", AbstractVehicle.class).getResultList();
+        return carListList;
+    }
+
+    public List<AbstractVehicle> getListOfEntityTruck() {
+        Session session = sessionFactory.getCurrentSession();
+        List<AbstractVehicle> carListList = session.createQuery("from Truck", AbstractVehicle.class).getResultList();
+        return carListList;
+    }
+
     @Override
     public Optional<AbstractVehicle> findEntity(String nameCar) {
         for (AbstractVehicle a : this.getListOfEntity()) {
@@ -55,5 +81,9 @@ public class HibernateCarDao implements Storage<AbstractVehicle, Long> {
             }
         }
         return Optional.empty();
+    }
+
+    public Optional<AbstractVehicle> findVehicleByOwner(User user){
+        return getListOfEntityCar().stream().filter(vehicle -> vehicle.getUser() == user).findFirst();
     }
 }

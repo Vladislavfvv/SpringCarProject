@@ -1,6 +1,10 @@
 package by.tms.configuration;
 
+import by.tms.dao.FileUploaderDao;
+import by.tms.dao.FileUploaderDaoImpl;
 import org.apache.tomcat.dbcp.dbcp2.BasicDataSource;
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -8,6 +12,7 @@ import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
@@ -21,6 +26,27 @@ import java.util.Properties;
 @ComponentScan(basePackages = "by.tms")
 @EnableTransactionManagement
 public class WebConfiguration extends WebMvcConfigurerAdapter {
+
+
+
+
+    @Autowired
+    @Bean(name = "fileUploadDao")
+    public FileUploaderDao getUserDao(SessionFactory sessionFactory) {
+        return new FileUploaderDaoImpl(sessionFactory);
+    }
+
+    @Bean(name = "multipartResolver")
+    public CommonsMultipartResolver getCommonsMultipartResolver() {
+        CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver();
+        multipartResolver.setMaxUploadSize(20971520); // 20MB
+        multipartResolver.setMaxInMemorySize(1048576);	// 1MB
+//        multipartResolver.setResolveLazily(true);
+        return multipartResolver;
+    }
+
+
+
 
     @Bean
     public DataSource dataSource() {
@@ -65,4 +91,6 @@ public class WebConfiguration extends WebMvcConfigurerAdapter {
         internalResourceViewResolver.setPrefix("/pages/");
         return internalResourceViewResolver;
     }
+
+
 }

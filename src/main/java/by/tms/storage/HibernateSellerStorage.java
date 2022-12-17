@@ -2,6 +2,7 @@ package by.tms.storage;
 
 import by.tms.entity.Offer;
 import by.tms.entity.Seller;
+import by.tms.entity.User;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -33,6 +34,11 @@ public class HibernateSellerStorage implements Storage<Seller, Long>{
 
     @Override
     public Optional<Seller> findEntity(String parameter) {
+        return Optional.empty();
+    }
+
+    @Override
+    public Optional<Seller> findVehicleByOwner(User currentUser) {
         return Optional.empty();
     }
 }

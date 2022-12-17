@@ -42,26 +42,25 @@
 <a href="/addOfferUser/offerListOfSeller">Yours offers: </a>
 <h3>Your offers : </h3>
 
-<ul>
-    <c:if test="${listOfOffers != null}">
-        <c:forEach items="${listOfOffers}" var="offer">
+
+<c:if test="${carList != null}">
+    <ul>
+        <c:forEach items="${carList}" var="offer">
             <li>
-                <c:out value="${offer.abstractProduct.nameProduct}"></c:out>
-                <c:out value="${offer.description}"></c:out>
-                <c:out value="${offer.price}"></c:out>
-                <c:out value="${offer.offerDateTime}"></c:out>
+                <c:out value="${offer.nameProduct}"></c:out>
+                <c:out value="${offer.srcPicture}"></c:out>
             </li>
         </c:forEach>
-    </c:if>
-</ul>
+    </ul>
+</c:if>
 
 
-<c:if test="${listOfOffers == null}">
+<c:if test="${carList == null}">
     <p>You haven't offers</p>
 </c:if>
-    <br>
-    <a href="${pageContext.request.contextPath}/user/logout" class="btn btn-primary">Logout</a>
-    <br>
+<br>
+<a href="${pageContext.request.contextPath}/user/logout" class="btn btn-primary">Logout</a>
+<br>
 
 
 <footer>

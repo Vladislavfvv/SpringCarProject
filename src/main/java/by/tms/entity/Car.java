@@ -1,16 +1,9 @@
 package by.tms.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
-import org.hibernate.validator.constraints.URL;
-
 import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
+import java.util.List;
 
 @Entity
 @Table(name = "cars")
@@ -24,8 +17,12 @@ public class Car extends AbstractVehicle {
     public Car() {
     }
 
-    public Car(String srcPicture, String nameProduct, String color, String producer, String releaseDate, User user, int passengerCapacity) {
-        super(srcPicture, nameProduct, color, producer, releaseDate, user);
+    public Car(FileUploader fileUploader, String srcPicture, String nameProduct, String color, String producer, String releaseDate, User user, int passengerCapacity) {
+        super(fileUploader, srcPicture, nameProduct, color, producer, releaseDate, user);
+        this.passengerCapacity = passengerCapacity;
+    }
+
+    public Car(int passengerCapacity) {
         this.passengerCapacity = passengerCapacity;
     }
 

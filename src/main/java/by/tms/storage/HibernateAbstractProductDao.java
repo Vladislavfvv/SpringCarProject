@@ -1,6 +1,7 @@
 package by.tms.storage;
 
 import by.tms.entity.AbstractProduct;
+import by.tms.entity.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,6 +52,11 @@ public class HibernateAbstractProductDao implements Storage<AbstractProduct, Lon
                 return Optional.of(product);
             }
         }
+        return Optional.empty();
+    }
+
+    @Override
+    public Optional<AbstractProduct> findVehicleByOwner(User currentUser) {
         return Optional.empty();
     }
 }

@@ -1,38 +1,45 @@
 package by.tms.web;
 
+
 import by.tms.dto.OfferDto;
 import by.tms.entity.*;
-import by.tms.service.AbstractProductService;
-import by.tms.service.CategoryService;
-import by.tms.service.OfferService;
-import by.tms.service.CarService;
+import by.tms.service.*;
 import by.tms.service.mapper.OfferMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
+@MultipartConfig
 @Controller
 @RequestMapping("/offer")
 public class OfferController {
 
     private final OfferService offerService;
-    private final AbstractProductService abstractProductService;
     private final CarService carService;
     private final OfferMapper offerMapper;
     private final CategoryService categoryservice;
+    private final UserService userService;
+    private final FileUploaderService fileUploaderService;
 
-    public OfferController(OfferService offerService, AbstractProductService abstractProductService, CarService carService, OfferMapper offerMapper, CategoryService categoryService) {
+
+    public OfferController(OfferService offerService, AbstractProductService abstractProductService, CarService carService, OfferMapper offerMapper, CategoryService categoryService, UserService userService, FileUploaderService fileUploaderService) {
         this.offerService = offerService;
-        this.abstractProductService = abstractProductService;
+
         this.carService = carService;
         this.offerMapper = offerMapper;
         this.categoryservice = categoryService;
+        this.userService = userService;
+        this.fileUploaderService = fileUploaderService;
     }
 
     @GetMapping("/selectProductCategory")
@@ -75,6 +82,32 @@ public class OfferController {
         }
     }
 
+    @GetMapping("/addCarHtml")
+    public String addCarHtml() {
+        return "offer/addCarHtml";
+    }
+
+    @GetMapping("/uploadImage")
+    public String uploadImage() {
+        return "uploadImage";
+    }
+
+//    @PostMapping("doUpload")
+//    public String doUpload(@RequestParam CommonsMultipartFile[] fileUpload) throws Exception {
+//        if (fileUpload != null && fileUpload.length > 0) {
+//            for (CommonsMultipartFile aFile : fileUpload) {
+//
+//                System.out.println("Saving file: " + aFile.getOriginalFilename());
+//
+//                org.apache.commons.fileupload.FileUpload uploadFile = new org.apache.commons.fileupload.FileUpload();
+//                uploadFile.setFileItemFactory(aFile.getOriginalFilename());
+//                uploadFile.setData(aFile.getBytes());
+//                fileUploadService.save(uploadFile);
+//            }
+//        }
+//        return "offer/success";
+//    }
+
 
 //    @GetMapping("/selectProductCategory")
 //    public String selectProductCategory(@RequestParam(value = "product", required = false) String product, Model model) {
@@ -111,6 +144,72 @@ public class OfferController {
     }
 
     @PostMapping("/addCar")
+    public String addCar2(@Valid @ModelAttribute("newCar") Car car,
+                          BindingResult bindingResult,
+                          HttpSession httpSession,
+                          Model model) {
+        if (bindingResult.hasErrors()) {
+            return "/offer/addCar";
+        }
+        User currentUser = (User) httpSession.getAttribute("currentUser");
+        Optional<AbstractVehicle> isExist = carService.findVehicleByName(car.getNameProduct());
+        if (isExist.isPresent()) {
+            Optional<AbstractVehicle> isExistByOwner = carService.findVehicleByOwner(currentUser);
+            if (isExistByOwner.isPresent()) {
+                model.addAttribute("message", "Such a vehicle with a user already exists");
+                return "/offer/addCar";
+            }
+            model.addAttribute("message", "Car is already exists");
+            return "/offer/addCar";
+        }
+        car.setUser(currentUser);
+        carService.save(car);
+        return "offer/completedOffer";
+    }
+
+    @PostMapping("/addCarWithUploadImage")
+    public String addCar2(@RequestParam MultipartFile file,
+                          @Valid @ModelAttribute("newCar") Car car,
+                          BindingResult bindingResult,
+                          HttpSession httpSession,
+                          Model model) throws IOException {
+
+        if (bindingResult.hasErrors() && file.isEmpty()) {
+            return "/offer/noResults";
+        }
+
+
+        Optional<AbstractVehicle> isExist = carService.findVehicleByName(car.getNameProduct());
+        if (isExist.isPresent()) {
+            model.addAttribute("message", "Car is already exists");
+            return "/offer/noResults";
+        }
+//
+        String fileName = StringUtils.cleanPath(file.getOriginalFilename());
+        if (fileName.contains("..")) {
+            model.addAttribute("message", "Name of image is not valid");
+            return "/offer/noResults";
+        }
+
+        FileUploader upload = new FileUploader();
+        upload.setFileName(fileName);
+        upload.setData(file.getBytes());
+        fileUploaderService.save(upload);
+
+
+        User addCurrentUser = (User) httpSession.getAttribute("currentUser");
+        car.setUser(addCurrentUser);
+        car.setFileUpload(upload);
+
+        carService.save(car);
+
+
+        return "offer/completedOffer";
+//            return "redirect:/user/personalAccount";
+    }
+
+
+ /*   @PostMapping("/addCar")
     public String addCar(@Valid @ModelAttribute("newCar") Car car, BindingResult bindingResult, HttpSession httpSession, Model model) {
         if (bindingResult.hasErrors()) {
             return "/offer/addCar";
@@ -129,7 +228,7 @@ public class OfferController {
         User addCurrentUser = (User) httpSession.getAttribute("currentUser");
         car.setUser(addCurrentUser);
         AbstractVehicle newCar = carService.save(car);
-       ///////// AbstractProduct newCar = abstractProductService.save(car);
+        ///////// AbstractProduct newCar = abstractProductService.save(car);
         //Seller seller =
 //            Offer offer = offerService.createOfferWithUserAndVehicleCategory(addCurrentUser, newCar);
 //
@@ -143,8 +242,7 @@ public class OfferController {
 
 
 //        return "redirect:/user/personalAccount";
-
-
+*/
 
     @PostMapping("/createOffer")
     public String createOffer(@Valid @ModelAttribute("OfferDTO") OfferDto offerDTO, BindingResult bindingResult, HttpSession httpSession, Model model) {
@@ -162,15 +260,38 @@ public class OfferController {
 
     @GetMapping("offerListOfSeller")
     public String offerListOfSeller(HttpSession httpSession, Model model) {
-
-        List<Offer> listOfOffers = offerService.getOfferList();
-        if (listOfOffers.isEmpty()) {
+        List<AbstractVehicle> carList = carService.getAbstractVehicle();
+        //List<Offer> listOfOffers = offerService.getOfferList();
+        if (carList.isEmpty()) {
             model.addAttribute("message", "Offer list is empty");
             return "offer/offerListOfSeller";
         }
-        model.addAttribute("listOfOffers", listOfOffers);
-        httpSession.setAttribute("listOfOffers", listOfOffers);
+        model.addAttribute("carList", carList);
+        httpSession.setAttribute("carList", carList);
 
         return "offer/offerListOfSeller";
     }
+
+
+    @GetMapping(value = "/doUpload")
+    public String showUploadForm() {
+        return "uploadImage";
+    }
+
+    @PostMapping(value = "/doUpload")
+    public String handleFileUpload(@RequestParam MultipartFile fileUpload) throws Exception {
+
+        if (fileUpload != null) {
+//            byte fileInByte[] = fileUpload.getBytes();
+            FileUploader upload = new FileUploader();
+            upload.setFileName(fileUpload.getOriginalFilename());
+            upload.setData(fileUpload.getBytes());
+            fileUploaderService.save(upload);
+        }
+
+
+        return "offer/Success";
+    }
+
+
 }

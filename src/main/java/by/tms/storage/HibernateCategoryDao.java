@@ -60,4 +60,9 @@ public class HibernateCategoryDao implements Storage<Category, Long> {
         }
         return Optional.empty();
     }
+
+    @Override
+    public Optional<Category> findVehicleByOwner(User currentUser) {
+        return Optional.empty();
+    }
 }

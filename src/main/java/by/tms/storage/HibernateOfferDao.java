@@ -1,6 +1,7 @@
 package by.tms.storage;
 
 import by.tms.entity.Offer;
+import by.tms.entity.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,6 +52,11 @@ public class HibernateOfferDao implements Storage<Offer, Long>{
             if (o.getAbstractProduct().equals(productName))
                 return Optional.of(o);
         }
+        return Optional.empty();
+    }
+
+    @Override
+    public Optional<Offer> findVehicleByOwner(User currentUser) {
         return Optional.empty();
     }
 }

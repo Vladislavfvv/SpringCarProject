@@ -1,6 +1,7 @@
 package by.tms.storage;
 
 import by.tms.entity.Offer;
+import by.tms.entity.User;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -46,6 +47,11 @@ public class InMemoryOfferStorage implements Storage<Offer, Long> {
             if(offer.getPrice().equals(price))
                 return Optional.of(offer);
         }
+        return Optional.empty();
+    }
+
+    @Override
+    public Optional<Offer> findVehicleByOwner(User currentUser) {
         return Optional.empty();
     }
 }

@@ -2,14 +2,15 @@ package by.tms.entity;
 
 import org.hibernate.validator.constraints.URL;
 
-import javax.persistence.ManyToOne;
-import javax.persistence.MappedSuperclass;
+import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+import java.util.List;
 
 @MappedSuperclass
-public abstract class AbstractVehicle extends AbstractEntity{
+public abstract class AbstractVehicle extends AbstractEntity {
+
 
     @NotBlank(message = "Field must not be empty")
     //@Pattern(message = "Must be src link", regexp = "https:.+\\.[\\w]{3,4}")
@@ -35,13 +36,31 @@ public abstract class AbstractVehicle extends AbstractEntity{
     @ManyToOne
     private User user;
 
-    public AbstractVehicle(String srcPicture, String nameProduct, String color, String producer, String releaseDate, User user) {
+    @OneToOne
+    private FileUploader fileUpload;
+
+    //@OneToOne
+//    private String image;
+
+    public AbstractVehicle(FileUploader fileUploader,
+            //String img,
+                           String srcPicture, String nameProduct, String color, String producer, String releaseDate, User user) {
+        // this.image = img;
+        this.fileUpload = fileUploader;
         this.srcPicture = srcPicture;
         this.nameProduct = nameProduct;
         this.color = color;
         this.producer = producer;
         this.releaseDate = releaseDate;
         this.user = user;
+    }
+
+    public FileUploader getFileUpload() {
+        return fileUpload;
+    }
+
+    public void setFileUpload(FileUploader fileUploader) {
+        this.fileUpload = fileUploader;
     }
 
     public AbstractVehicle() {
@@ -54,6 +73,22 @@ public abstract class AbstractVehicle extends AbstractEntity{
         this.producer = producer;
         this.releaseDate = releaseDate;
     }
+
+//    public String getImage() {
+//        return image;
+//    }
+//
+//    public void setImage(String image) {
+//        this.image = image;
+//    }
+
+//    public ImageUpload getImage() {
+//        return image;
+//    }
+//
+//    public void setImage(ImageUpload image) {
+//        this.image = image;
+//    }
 
     public String getSrcPicture() {
         return srcPicture;

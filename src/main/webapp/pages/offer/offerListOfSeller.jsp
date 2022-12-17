@@ -13,21 +13,34 @@
 </head>
 <body>
 <%--<jsp:useBean id="listOfOffers" scope="request" type="by.tms.web.OfferController"/>--%>
-<c:if test="${listOfOffers != null}">
+<c:if test="${carList != null}">
     <ul>
-        <c:forEach items="${listOfOffers}" var="offer">
+        <c:forEach items="${carList}" var="offer">
             <li>
-                <c:out value="${offer.abstractProduct.nameProduct}"></c:out>
-                <c:out value="${offer.description}"></c:out>
-                <c:out value="${offer.price}"></c:out>
-                <c:out value="${offer.offerDateTime}"></c:out>
+                <c:out value="${offer.nameProduct}"></c:out>
+                <c:out value="${offer.srcPicture}"></c:out>
             </li>
         </c:forEach>
     </ul>
 </c:if>
 
 
-<c:if test="${listOfOffers == null}">
+
+
+<%--<c:if test="${listOfOffers != null}">--%>
+<%--    <ul>--%>
+<%--        <c:forEach items="${listOfOffers}" var="offer">--%>
+<%--            <li>--%>
+<%--                <c:out value="${offer.abstractProduct.nameProduct}"></c:out>--%>
+<%--                <c:out value="${offer.description}"></c:out>--%>
+<%--                <c:out value="${offer.price}"></c:out>--%>
+<%--                <c:out value="${offer.offerDateTime}"></c:out>--%>
+<%--            </li>--%>
+<%--        </c:forEach>--%>
+<%--    </ul>--%>
+<%--</c:if>--%>
+
+<c:if test="${carList == null}">
     <p>You haven't offers</p>
 </c:if>
 

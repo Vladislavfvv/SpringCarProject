@@ -16,6 +16,12 @@
     <jsp:include page="../user/header.jsp"></jsp:include>
 </header>
 <s:form action="/offer/addCar" method="post" modelAttribute="newCar">
+    <%--download file--%>
+<%--    <s:input path="fileUpload" type="file" size="10000000000" name="fileUpload" class="custom-file-input"--%>
+<%--             id="customFile"/>--%>
+<%--    <s:label path="fileUpload" class="custom-file-label" for="customFile">Product Image</s:label>&ndash;%&gt;--%>
+<%--    <s:errors path="fileUpload"/>--%>
+<%--    <br>--%>
     <p>Enter Add a link to your car image:</p>
     <s:input path="srcPicture" size="30" placeholder="srcPicture"/>
     <br>

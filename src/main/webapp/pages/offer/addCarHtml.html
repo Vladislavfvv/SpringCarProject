@@ -1,30 +1,64 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.thymeleaf.com">
 <head>
-  <meta charset="UTF-8">
-  <title>Add car</title>
+    <meta charset="UTF-8">
+    <title>Add car</title>
 </head>
 <body>
-<form th:action="@{/offer/listOfOffers/addCar}" th:object="${addCar}" method="post">
-  <p>srcPicture</p>
-  <input type="text" th:field="*{srcPicture}" th:placeholder="srcPicture"/>
-  <br>
-  <p>nameProduct</p>
-  <input type="text" th:field="*{nameProduct}" th:placeholder="nameProduct"/>
-  <br>
-  <p>releaseDate</p>
-  <input type="text" th:field="*{releaseDate}" th:placeholder="releaseDate"/>
-  <br>
-  <p>color</p>
-  <input type="text" th:field="*{color}" th:placeholder="color"/>
-  <br>
-  <p>producer</p>
-  <input type="text" th:field="*{producer}" th:placeholder="producer"/>
-  <br>
-  <p>passengerCapacity</p>
-  <input type="text" th:field="*{passengerCapacity}" th:placeholder="passengerCapacity"/>
-  <br>
-  <button type="submit">Submit</button>
+<form action="/offer/addCarHtml" method="post">
+    <p>image</p>
+
+    <div class="custom-file mb-4">
+        <input type="file" name="file" class="custom-file-input" id="customFile">
+        <label class="custom-file-label" for="customFile">Product Image</label>
+    </div>
+    <div class="custom-file mb-4">
+        <input type="url" name="srcPicture" id="srcPicture" class="form-control mb-4"
+               placeholder="srcPicture">
+    </div>
+    <div class="custom-file mb-4">
+        <input type="text" name="nameProduct" id="nameProduct" class="form-control mb-4"
+               placeholder="nameProduct">
+    </div>
+    <div class="custom-file mb-4">
+        <input type="text" name="releaseDate" id="releaseDate" class="form-control mb-4"
+               placeholder="releaseDate">
+    </div>
+    <div class="custom-file mb-4">
+        <input type="text" name="color" id="color" class="form-control mb-4"
+               placeholder="color">
+    </div>
+    <div class="custom-file mb-4">
+        <input type="text" name="producer" id="producer" class="form-control mb-4"
+               placeholder="producer">
+    </div>
+    <div class="custom-file mb-4">
+        <input type="text" name="passengerCapacity" id="passengerCapacity" class="form-control mb-4"
+               placeholder="passengerCapacity">
+    </div>
+
+    <!--    /*th:field="*{srcPicture}" th:placeholder="srcPicture"-->
+    <!--    <br>-->
+
+    <!--    <p>srcPicture</p>-->
+    <!--    <input type="text" th:field="*{srcPicture}" th:placeholder="srcPicture"/>-->
+    <!--    <br>-->
+    <!--    <p>nameProduct</p>-->
+    <!--    <input type="text" th:field="*{nameProduct}" th:placeholder="nameProduct"/>-->
+    <!--    <br>-->
+    <!--    <p>releaseDate</p>-->
+    <!--    <input type="text" th:field="*{releaseDate}" th:placeholder="releaseDate"/>-->
+    <!--    <br>-->
+    <!--    <p>color</p>-->
+    <!--    <input type="text" th:field="*{color}" th:placeholder="color"/>-->
+    <!--    <br>-->
+    <!--    <p>producer</p>-->
+    <!--    <input type="text" th:field="*{producer}" th:placeholder="producer"/>-->
+    <!--    <br>-->
+    <!--    <p>passengerCapacity</p>-->
+    <!--    <input type="text" th:field="*{passengerCapacity}" th:placeholder="passengerCapacity"/>-->
+    <!--    <br>*/-->
+    <button class="btn btn-info btn-block" type="submit">Submit</button>
 </form>
 
 </body>
